@@ -11,29 +11,16 @@ Content-Type: application/json
     "status": "A"
 }
 
-<<<<<<< HEAD
 ###
 
 GET http://localhost:3000/items
 ####
 GET  http://localhost:3000/items/2
 ####
-=======
-
-### find all
-GET http://localhost:3000/items
-
-### find one
-GET http://localhost:3000/items/2
-
-
-### update
->>>>>>> e0952c823334028e06891fff10461c7c800c7660
 PATCH http://localhost:3000/items/2
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
     # "title": "คีย์บอร์ด2",
     # "contactMobileNo":"0876494762",
     "amount": "12"
@@ -41,26 +28,3 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/items/3
-=======
-    "title": "Mouse wireless",
-    "contactMobileNo": "0991234567"
-}
-
-### delete
-DELETE http://localhost:3000/items/999
-
-### validation
-
-### find one by string
-GET http://localhost:3000/items/A
-
-### create with wrong amount number type
-POST http://localhost:3000/items
-Content-Type: application/json
-
-{
-    "title": "",
-    "amount": "SHOUD_BE_NUM",
-    "price": 5000    
-}
->>>>>>> e0952c823334028e06891fff10461c7c800c7660
