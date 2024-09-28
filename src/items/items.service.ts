@@ -26,15 +26,39 @@ export class ItemsService {
     return this.itemRepository.findOneBy({ id });
   }
 
+<<<<<<< HEAD
   update(id: number, updateItemDto: UpdateItemDto) {
+=======
+  update(id: number, updateItemDto: UpdateItemDto) {    
+    // => { id, title, contectMobileNo }
+    // update item set tile = '', con = '' where id = ?
+
+    // const updateItem = {
+    //   id: id,
+    //   title: updateItemDto.title,
+    //   contactMobileNo = updateItemDto.contactMobileNo
+    //   status: updateItemDto.state
+    // }
+
+>>>>>>> e0952c823334028e06891fff10461c7c800c7660
     return this.itemRepository.save({ id, ...updateItemDto });
   }
 
   async remove(id: number) {
+<<<<<<< HEAD
     // const item = this.itemRepository.findOneBy({id});
     // if(!item){
     //   throw new NotFoundException(`Not found id: ${id}`)
     // }
     return this.itemRepository.delete({ id });
+=======
+    // const where = { id: id}
+    // find by id
+    const item = await this.itemRepository.findOneBy({ id })
+    if (!item) {
+      throw new NotFoundException(`Not found: id=${id}`)
+    }
+    return this.itemRepository.delete({ id })
+>>>>>>> e0952c823334028e06891fff10461c7c800c7660
   }
 }
