@@ -5,7 +5,7 @@ export enum Role {
   ADMIN = 'ADMIN'
 }
 
-@Entity()
+@Entity('bg_user')
 export class User {
 
     @PrimaryGeneratedColumn()
