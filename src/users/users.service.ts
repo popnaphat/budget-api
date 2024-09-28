@@ -52,4 +52,12 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  async findOneByUsername(username: string): Promise<User> {
+    if (!username) {
+      return null
+    }
+    return this.userRepository.findOneBy({ username })
+  }
+
 }
