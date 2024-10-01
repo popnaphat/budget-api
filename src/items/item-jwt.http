@@ -1,0 +1,32 @@
+# items-jwt.http
+### auth login
+
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "u1002",
+    "password": "changeit"
+}
+
+###
+@authToken = {{login.response.body.access_token}}
+
+
+### find all
+GET http://localhost:3000/items
+Authorization: Bearer {{authToken}}
+
+### find all with static jwt
+GET http://localhost:3000/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ1MTAwNSIsInJvbGUiOiJVU0VSIiwic3ViIjoyLCJpYXQiOjE3Mjc3MDYyMTN9.cmO1_PEEpWm4GdxdWjj6csjZot4JJviMcPCYLGYWuys
+
+
+### find all with invalid jwt
+GET http://localhost:3000/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ1MTAwNSIsInJvbGUiOiJVU0VSIiwic3ViIjoyLCJpYXQiOjE3Mjc3MDYyMzB9.FzCfEDmLwrjTI0ukEBl9vQ3NYpR5gv-AD-UBHOHdNUs
+
+### approve
+PATCH http://localhost:3000/items/3/PENDING
+Authorization: Bearer {{authToken}}

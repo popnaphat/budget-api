@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
@@ -16,7 +16,12 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     // return this.userRepository.save(createUserDto);
-
+    // ตรวจสอบว่ามี username อยู่แล้วหรือไม่
+    const existingUser = await this.userRepository.findOneBy({ username: createUserDto.username });
+    if (existingUser) {
+      // ถ้ามีแล้ว โยนข้อผิดพลาด (ConflictException) ออกไป
+      throw new ConflictException('Username already exists');
+    }
     // gen salt    
     const salt = await bcrypt.genSalt();
 
@@ -38,7 +43,7 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userRepository.find();
   }
 
   findOne(id: number) {

@@ -1,5 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
-
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
+export enum ItemStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
 @Entity()
 export class Item {
   @PrimaryGeneratedColumn()
@@ -17,6 +26,12 @@ export class Item {
   @Column({ nullable: true })
   contactMobileNo: string;
 
+  @Column({
+    nullable: false,
+    default: ItemStatus.PENDING,
+  })
+  status: ItemStatus;
+  
   @CreateDateColumn({ type: 'timestamp' }) // Automatically sets the timestamp when a row is created
   timestamp: Date;
 }

@@ -4,11 +4,10 @@ POST http://localhost:3000/items
 Content-Type: application/json
 
 {
-    "title": "Keyboard",
-    "amount": 10,
-    "price": 10000,
-    "contactMobileNo": "0891234567",
-    "status": "A"
+    "title": "Solar Roof",
+    "amount": 100,
+    "price": 300000,
+    "contactMobileNo": "0891234521"
 }
 
 ###

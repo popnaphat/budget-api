@@ -7,3 +7,7 @@ Content-Type: application/json
     "password": "changeit",
     "role": "USER"
 }
+
+#####
+GET http://localhost:3000/users
+Content-Type: application/json
