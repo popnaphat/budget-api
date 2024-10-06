@@ -20,7 +20,7 @@ export class UsersService {
     const existingUser = await this.userRepository.findOneBy({ username: createUserDto.username });
     if (existingUser) {
       // ถ้ามีแล้ว โยนข้อผิดพลาด (ConflictException) ออกไป
-      throw new ConflictException('Username already exists');
+      throw new ConflictException('มี Username นี้อยู่แล้ว');
     }
     // gen salt    
     const salt = await bcrypt.genSalt();

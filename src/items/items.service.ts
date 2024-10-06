@@ -17,6 +17,19 @@ export class ItemsService {
     return this.itemRepository.save(createItemDto);
   }
 
+  searchByIds(ids: number[]) {
+    return this.itemRepository.find({ where: {
+      id: In(ids)
+    } });
+  }
+
+  searchByIdsNativeQuery(ids: number[]) {
+    const placeholders = ids.map((_, index) => `$${index + 1}`).join(',');
+    const query = `SELECT * FROM item WHERE id IN (${placeholders})`;
+    console.log(query)
+    return this.itemRepository.query(query, ids);
+  } 
+
   findAll() {
     return this.itemRepository.find();
   }

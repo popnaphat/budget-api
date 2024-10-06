@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, BadRequestException, Query, ParseArrayPipe } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { ItemStatus } from './entities/item.entity';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/users/entities/user.entity';
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) { }
@@ -12,6 +14,12 @@ export class ItemsController {
   @Post()
   create(@Body() createItemDto: CreateItemDto) {
     return this.itemsService.create(createItemDto);
+  }
+
+  @Get('search')
+  searchByIds(@Query('ids', new ParseArrayPipe({ items: Number, separator: ',' })) ids: number[]) {
+    //return this.itemsService.searchByIds(ids);
+    return this.itemsService.searchByIdsNativeQuery(ids)
   }
 
   @UseGuards(JwtAuthGuard)
@@ -36,6 +44,7 @@ export class ItemsController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles([Role.ADMIN, Role.MANAGER])
   @Patch(':id/:status')
   async updateItemStatus(
     @Param('id', ParseIntPipe) id: number,
