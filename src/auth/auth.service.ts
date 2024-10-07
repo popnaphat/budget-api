@@ -57,7 +57,7 @@ export class AuthService {
     // sign new access_token (refresh it!)
     const payload: LoggedInDto = {...loggedInDto, sub: loggedInDto.id };
     const access_token = this.jwtService.sign(payload,{
-      secret: this.configService.get('REFRESH_JWT_SECRET'),
+      secret: this.configService.get('JWT_SECRET'),
       expiresIn: this.configService.get('JWT_EXPIRES_IN')
     });
     return { access_token }

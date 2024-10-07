@@ -12,8 +12,9 @@ export class RefreshJwtStrategy extends PassportStrategy(Strategy, 'jwt-refresh'
             secretOrKey: configService.get('REFRESH_JWT_SECRET')
         })
     }
-
+    
     async validate(payload: any) {
+        
         const { iat, exp, ...loggedInDto } = payload;
         return loggedInDto
     }

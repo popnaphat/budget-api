@@ -31,11 +31,19 @@ export class ItemsService {
   } 
 
   findAll() {
-    return this.itemRepository.find();
+    return this.itemRepository.find({
+      order: {
+        id: 'ASC'
+      }
+    });
   }
 
   findOne(id: number) {
     return this.itemRepository.findOneBy({ id });
+  }
+
+  findOneByTitle(title: string) {
+    return this.itemRepository.findOneBy({ title });
   }
 
   update(id: number, updateItemDto: UpdateItemDto) {

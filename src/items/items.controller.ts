@@ -11,6 +11,7 @@ import { Role } from 'src/users/entities/user.entity';
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) { }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createItemDto: CreateItemDto) {
     return this.itemsService.create(createItemDto);
@@ -22,7 +23,7 @@ export class ItemsController {
     return this.itemsService.searchByIdsNativeQuery(ids)
   }
 
-  @UseGuards(JwtAuthGuard)
+  
   @Get()
   findAll() {
     return this.itemsService.findAll();
@@ -32,12 +33,18 @@ export class ItemsController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.itemsService.findOne(id);
   }
+  @Get(':title')
+  findOneByTitle(@Param('title') title: string) {
+    return this.itemsService.findOneByTitle(title);
+  }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
     return this.itemsService.update(+id, updateItemDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.itemsService.remove(+id);
