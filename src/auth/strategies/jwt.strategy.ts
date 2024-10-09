@@ -16,6 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     validate(payload: LoggedInDto): LoggedInDto {
+        //console.log(payload)
         return payload
     }
 }

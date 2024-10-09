@@ -48,7 +48,7 @@ Content-Type: application/json
 @authTokenAdmin = {{loginAdmin.response.body.access_token}}
 
 ### Admin approve
-PATCH http://localhost:3000/items/5/APPROVED
+PATCH http://localhost:3000/items/6/APPROVED
 Authorization: Bearer {{authTokenAdmin}}
 
 

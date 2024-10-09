@@ -37,4 +37,7 @@ export class Item {
   
   @CreateDateColumn({ type: 'timestamp' }) // Automatically sets the timestamp when a row is created
   timestamp: Date;
+
+  @Column({ nullable: false })
+  createdBy: string;
 }

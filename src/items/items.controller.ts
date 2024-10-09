@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, BadRequestException, Query, ParseArrayPipe } from '@nestjs/common';
+//items.controller
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, BadRequestException, Query, ParseArrayPipe, Request } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
@@ -13,7 +14,10 @@ export class ItemsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createItemDto: CreateItemDto) {
+  create(@Body() createItemDto: CreateItemDto, @Request() req: any) {
+    // เพิ่ม username จาก JWT ลงใน createItemDto
+    createItemDto.createdBy = req.user.username; 
+    console.log(createItemDto)
     return this.itemsService.create(createItemDto);
   }
 
@@ -39,8 +43,9 @@ export class ItemsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch(':id')
+  @Patch('edit/:id')
   update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
+    // console.log(updateItemDto)
     return this.itemsService.update(+id, updateItemDto);
   }
 
