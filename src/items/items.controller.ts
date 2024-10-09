@@ -33,9 +33,9 @@ export class ItemsController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.itemsService.findOne(id);
   }
-  @Get(':title')
-  findOneByTitle(@Param('title') title: string) {
-    return this.itemsService.findOneByTitle(title);
+  @Get('title/:title')
+  findAllByTitle(@Param('title') title: string) {
+    return this.itemsService.findAllByTitle(title);
   }
 
   @UseGuards(JwtAuthGuard)

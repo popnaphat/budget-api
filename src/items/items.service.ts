@@ -42,8 +42,11 @@ export class ItemsService {
     return this.itemRepository.findOneBy({ id });
   }
 
-  findOneByTitle(title: string) {
-    return this.itemRepository.findOneBy({ title });
+  findAllByTitle(title: string) {
+    return this.itemRepository
+      .createQueryBuilder('item')
+      .where('item.title LIKE :title', { title: `%${title}%` })
+      .getMany();
   }
 
   update(id: number, updateItemDto: UpdateItemDto) {
