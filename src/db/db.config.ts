@@ -16,12 +16,12 @@ export const dbConfig = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  // ssl: process.env.DB_SSL === 'true', // Convert string to boolean
-  // extra: {
-  //   ssl: process.env.DB_SSL === 'true' ? {
-  //     rejectUnauthorized: false, // Skip verifying the SSL certificate
-  //   } : undefined, // Avoid adding 'extra.ssl' if not needed
-  // },
+  ssl: process.env.DB_SSL === 'true', // Convert string to boolean
+  extra: {
+    ssl: process.env.DB_SSL === 'true' ? {
+      rejectUnauthorized: false, // Skip verifying the SSL certificate
+    } : undefined, // Avoid adding 'extra.ssl' if not needed
+  },
   autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITIES === 'true', // Convert string to boolean
   synchronize: process.env.DB_SYNCHRONIZE === 'true', // Convert string to boolean
   entities: ['dist/**/*.entity.js'], // Adjust based on your project structure
