@@ -13,12 +13,12 @@ export class CreateItemDto {
     @IsNotEmpty()
     amount: number;
 
-    @IsNumber()
+    @IsNumber({}, { message: isNumberMessage})
     @IsNotEmpty()
     price: number;
 
     @IsOptional()
     contactMobileNo: string;
 
-    createdBy?: string;
+    createdby?: string;
 }

@@ -16,7 +16,7 @@ export class ItemsController {
   @Post()
   create(@Body() createItemDto: CreateItemDto, @Request() req: any) {
     // เพิ่ม username จาก JWT ลงใน createItemDto
-    createItemDto.createdBy = req.user.username; 
+    createItemDto.createdby = req.user.username; 
     console.log(createItemDto)
     return this.itemsService.create(createItemDto);
   }
@@ -27,7 +27,7 @@ export class ItemsController {
     return this.itemsService.searchByIdsNativeQuery(ids)
   }
 
-  
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.itemsService.findAll();

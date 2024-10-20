@@ -17,8 +17,8 @@ export class Item {
   @Column()
   title: string;
 
-  // @Column({ nullable: true })
-  // description: string;
+  @Column({ nullable: true })
+  description: string;
 
   @Column('int')
   amount: number;
@@ -26,7 +26,10 @@ export class Item {
   @Column('decimal')
   price: number;
 
-  @Column({ nullable: true })
+  @Column({
+      name:"contact_mobile_no",
+      nullable: true
+  })
   contactMobileNo: string;
 
   @Column({
@@ -39,5 +42,5 @@ export class Item {
   timestamp: Date;
 
   @Column({ nullable: false })
-  createdBy: string;
+  createdby: string;
 }

@@ -1,9 +1,11 @@
 // auth.controller.ts
-import { Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { LoggedInDto } from './dto/logged-in.dto';
 import { RefreshJwtAuthGuard } from './guards/refresh-jwt-auth.guard';
+//import { PerfLoggerInterceptor } from 'src/interceptors/perf-logger.interceptor';
+import { Oauth2AuthGuard } from './guards/oauth2-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -18,5 +20,16 @@ export class AuthController {
   @Post('refresh')
   refreshToken(@Request() request: { user : LoggedInDto }) {
     return this.authService.refreshToken(request.user);
+  }
+
+  @Get('login-oauth2-redirect-url')
+  loginOauth2RedirectUrl(): { redirectUrl: string } {
+    return { redirectUrl: this.authService.getOauth2RedirectUrl() };
+  }
+
+  @UseGuards(Oauth2AuthGuard)
+  @Post('login-oauth2')
+  loginKeycloak(@Request() request: { user : LoggedInDto }) {
+    return this.authService.login(request.user)
   }
 }
