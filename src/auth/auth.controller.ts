@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Get('login-oauth2-redirect-url')
-  loginOauth2RedirectUrl(): { redirectUrl: string } {
+  loginOauth2RedirectUrl(): { redirectUrl: string } { ///url หน้า login 3rd party oAuth Keycloak
     return { redirectUrl: this.authService.getOauth2RedirectUrl() };
   }
 
